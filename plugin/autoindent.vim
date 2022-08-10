@@ -31,7 +31,7 @@ function! s:autoindent#buffer() abort
     return buffer
 endfunction
 
-function! s:autoindent#indent() abort
+function! autoindent#indent() abort
     let l:prev = call s:autoindent#buffer()
 
     execute "normal gg=G"

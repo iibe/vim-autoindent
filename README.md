@@ -8,7 +8,7 @@ Install using your favorite package manager, or manually:
 
 ### Plugin Manager
 
-#### For [Pathogen][https://github.com/tpope/vim-pathogen]:
+For [Pathogen](https://github.com/tpope/vim-pathogen):
 
 ```bash
 git clone https://github.com/iibe/vim-autoindent ~/.vim/bundle/vim-autoindent
@@ -16,37 +16,37 @@ git clone https://github.com/iibe/vim-autoindent ~/.vim/bundle/vim-autoindent
 
 > Remember to run `:Helptags` to generate help tags.
 
-#### For [neobundle.vim][https://github.com/shougo/neobundle.vim]:
+For [neobundle.vim](https://github.com/shougo/neobundle.vim):
 
 ```vim
 NeoBundle 'vim-autoindent/vim-autoindent'
 ```
 
-#### For [Vundle.vim][https://github.com/vundlevim/vundle.vim]:
+For [Vundle.vim](https://github.com/vundlevim/vundle.vim):
 
 ```vim
 Plugin 'vim-autoindent/vim-autoindent'
 ```
 
-#### For [vim-plug][https://github.com/junegunn/vim-plug]:
+For [vim-plug](https://github.com/junegunn/vim-plug):
 
 ```vim
 Plug 'iibe/vim-autoindent'
 ```
 
-#### For [vim-addon-manager][https://github.com/marcweber/vim-addon-manager]:
+For [vim-addon-manager](https://github.com/marcweber/vim-addon-manager):
 
 ```vim
 call vam#ActivateAddons([ 'vim-autoindent' ])
 ```
 
-#### For [dein.vim][https://github.com/shougo/dein.vim]:
+For [dein.vim](https://github.com/shougo/dein.vim):
 
 ```vim
 call dein#add('vim-autoindent/vim-autoindent')
 ```
 
-#### For [minpac][https://github.com/k-takata/minpac]:
+For [minpac](https://github.com/k-takata/minpac):
 
 ```vim
 call minpac#add('vim-autoindent/vim-autoindent')
@@ -54,19 +54,19 @@ call minpac#add('vim-autoindent/vim-autoindent')
 
 ### Manual
 
-#### For Neovim
+For [Neovim](https://neovim.io):
 
 ```bash
 git clone https://github.com/iibe/vim-autoindent.git ~/.config/nvim/plugged/vim-autoindent
 ```
 
-#### For Vim
+For [Vim](https://www.vim.org):
 
 ```bash
 git clone https://github.com/iibe/vim-autoindent.git ~/.vim/bundle/vim-autoindent
 ```
 
-#### For Vim 8 (pack)
+For [Vim 8](https://www.vim.org) (pack):
 
 ```bash
 git clone https://github.com/iibe/vim-autoindent ~/.vim/pack/dist/start/vim-autoindent
@@ -79,8 +79,8 @@ git clone https://github.com/iibe/vim-autoindent ~/.vim/pack/dist/start/vim-auto
 ```vim
 augroup autoindent
     autocmd!
-    autocmd BufWritePre <buffer> call autoindent#format()
-    " autocmd BufWritePre * :normal gg=G``
+    autocmd BufWritePre <buffer> call autoindent#indent()
+    autocmd BufWritePre <buffer> call autoindent#spaces()
 augroup END
 ```
 

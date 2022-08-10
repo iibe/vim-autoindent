@@ -9,6 +9,6 @@
 " Test
 augroup autoindent
     autocmd!
-    autocmd BufWritePre <buffer> call autoindent#indent()
-    autocmd BufWritePre <buffer> call autoindent#spaces()
+    autocmd BufWritePre <buffer> call vim-autoindent#indent()
+    autocmd BufWritePre <buffer> call vim-autoindent#spaces()
 augroup END

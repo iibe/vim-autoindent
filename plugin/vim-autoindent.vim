@@ -15,7 +15,7 @@ endif
 
 let g:loaded_vim-autoindent = 1
 
-function! autoindent#buffer() abort
+function! vim-autoindent#buffer() abort
     let l:buffer = {}
     let l:buffer.id = getpos('.')[0]
     let l:buffer.offset = getpos('.')[3]
@@ -30,12 +30,12 @@ function! autoindent#buffer() abort
     return buffer
 endfunction
 
-function! autoindent#indent() abort
-    let l:prev = call autoindent#buffer()
+function! vim-autoindent#indent() abort
+    let l:prev = call vim-autoindent#buffer()
 
     execute "normal gg=G"
 
-    let l:curr = call autoindent#buffer()
+    let l:curr = call vim-autoindent#buffer()
 
     if l:curr.cursor.x != l:prev.cursor.x  || l:curr.cursor.y != l:prev.cursor.y
         call setpos('.', prev.cursor.position)
@@ -44,8 +44,20 @@ function! autoindent#indent() abort
     echo 'Format:' . ' ' .  string(l:ide.cursor.x)
 endfunction
 
-function! autoindent#spaces() abort
+function! vim-autoindent#spaces() abort
     " autocmd BufWritePre * :%s/\s\+$//e
+endfunction
+
+function! vim-autoindent#format() abort
+endfunction
+
+function! vim-autoindent#indent_all() abort
+endfunction
+
+function! vim-autoindent#spaces_all() abort
+endfunction
+
+function! vim-autoindent#format_all() abort
 endfunction
 
 " Exposes the plugin's functions for use as commands in Vim.

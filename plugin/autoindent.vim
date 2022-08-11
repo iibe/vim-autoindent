@@ -16,7 +16,7 @@ endif
 
 let g:loaded_autoindent = 1
 
-function! s:autoindent#buffer() abort
+function! autoindent#buffer() abort
     let l:buffer = {}
     let l:buffer.id = getpos('.')[0]
     let l:buffer.offset = getpos('.')[3]
@@ -32,11 +32,11 @@ function! s:autoindent#buffer() abort
 endfunction
 
 function! autoindent#indent() abort
-    let l:prev = call s:autoindent#buffer()
+    let l:prev = call autoindent#buffer()
 
     execute "normal gg=G"
 
-    let l:curr = call s:autoindent#buffer()
+    let l:curr = call autoindent#buffer()
 
     if l:curr.cursor.x != l:prev.cursor.x  || l:curr.cursor.y != l:prev.cursor.y
         call setpos('.', prev.cursor.position)
@@ -60,8 +60,8 @@ function! autoindent#format_all() abort
 endfunction
 
 " Exposes the plugin's functions for use as commands in Vim.
-command! -nargs=0 AiFormat call autoindent#indent()
-command! -nargs=0 AiFormatAll call autoindent#indent_all()
+command! -nargs=0 AiIndent call autoindent#indent()
+command! -nargs=0 AiIndentAll call autoindent#indent_all()
 
 command! -nargs=0 AiSpaces call autoindent#spaces()
 command! -nargs=0 AiSpacesAll call autoindent#spaces_all()

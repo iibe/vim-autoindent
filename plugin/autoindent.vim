@@ -38,25 +38,32 @@ function! autoindent#indent() abort
 
     let l:curr = call autoindent#buffer()
 
-    if l:curr.cursor.x != l:prev.cursor.x  || l:curr.cursor.y != l:prev.cursor.y
+    if l:curr.cursor.x != l:prev.cursor.x || l:curr.cursor.y != l:prev.cursor.y
         call setpos('.', l:prev.cursor.position)
     endif
+
+    echo "autoindent#indent() was done"
 endfunction
 
 function! autoindent#spaces() abort
     " autocmd BufWritePre * :%s/\s\+$//e
+    echo "autoindent#spaces() was done"
 endfunction
 
 function! autoindent#format() abort
+    echo "autoindent#format() was done"
 endfunction
 
 function! autoindent#indent_all() abort
+    echo "autoindent#indent_all() was done"
 endfunction
 
 function! autoindent#spaces_all() abort
+    echo "autoindent#spaces_all() was done"
 endfunction
 
 function! autoindent#format_all() abort
+    echo "autoindent#format_all() was done"
 endfunction
 
 " Exposes the plugin's functions for use as commands in Vim.

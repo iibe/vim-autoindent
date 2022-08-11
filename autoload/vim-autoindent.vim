@@ -7,9 +7,8 @@
 " Last Modified: 10 Aug 2022
 " ------------------------------------------------------------------------------
 
-" Test
 augroup autoindent
     autocmd!
-    autocmd BufWritePre <buffer> call autoindent#indent()
-    autocmd BufWritePre <buffer> call autoindent#spaces()
+    autocmd BufWritePre * call autoindent#indent()
+    autocmd BufWritePre * call autoindent#spaces()
 augroup END

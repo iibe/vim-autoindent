@@ -34,12 +34,12 @@ endfunction
 function! autoindent#indent() abort
     let l:prev = call autoindent#buffer()
 
-    execute "normal gg=G"
+    execute 'normal gg=G'
 
     let l:curr = call autoindent#buffer()
 
     if l:curr.cursor.x != l:prev.cursor.x  || l:curr.cursor.y != l:prev.cursor.y
-        call setpos('.', prev.cursor.position)
+        call setpos('.', l:prev.cursor.position)
     endif
 endfunction
 

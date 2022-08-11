@@ -76,40 +76,36 @@ git clone https://github.com/iibe/vim-autoindent ~/.vim/pack/dist/start/vim-auto
 
 ## Setup
 
-> Paste one of the options below in your `init.vim` file.
+> Paste one of the options below in your `init.vim`.
 
 Fixes trailing spaces in the current buffer:
 
 ```vim
-call autoindent#FixWhitespaces()
+autocmd BufWritePre * call autoindent#FixWhitespaces()
 ```
 
 Fixes indentation of the current buffer and returns cursor position at initial point:
 
 ```vim
-call autoindent#FixIndentation()
+autocmd BufWritePre * call autoindent#FixIndentation()
 ```
 
 Fixes all stylistic errors in current file:
 
 ```vim
-call autoindent#FormatFile()
+autocmd BufWritePre * call autoindent#FormatFile()
 ```
 
 ## Troubleshooting
 
-    - If you get an error during installation, try to visit official repository for your package manager (since it's probably some typo or guide it outdated by itself).
-    - If you have any suggestions for how the plugin works, feel free to do [pull request][pr].
+- If you get an error during installation, try to visit official repository for your package manager (since it's probably some typo or guide it outdated by itself).
+- If you have any suggestions for how the plugin works, feel free to do [pull request][pr].
 
 ## Feedback
 
-    - If you think [vim-autoindent][repo] is useful, consider giving it a star.
-    - If you have a bug or an idea, feel free to open an [issue][issues].
+- If you think [vim-autoindent][repo] is useful, consider giving it a star.
+- If you have a bug or an idea, feel free to open an [issue][issues].
 
-    [repo]: https://github.com/iibe/vim-autoindent
-    [pr]: https://github.com/iibe/vim-autoindent/pulls
-    [issues]: https://github.com/iibe/vim-autoindent/issues
-
-```
-
-```
+[repo]: https://github.com/iibe/vim-autoindent
+[pr]: https://github.com/iibe/vim-autoindent/pulls
+[issues]: https://github.com/iibe/vim-autoindent/issues

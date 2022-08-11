@@ -18,14 +18,37 @@ let g:loaded_autoindent = 1
 
 " Fixes indentation of the current buffer and returns cursor position at initial point.
 function! autoindent#FixIndentation()
-    let l:view = winsaveview()
+    let view = winsaveview()
     silent execute ':normal gg=G'
-    call winrestview(l:view)
+    call winrestview(view)
 endfunction
 
 " Fixes trailing spaces in the current buffer.
 function! autoindent#FixWhitespaces()
     silent execute ':%s/\s\+$//e'
+endfunction
+
+" Reads .gitignore file
+function! autoindent#GitIgnore()
+    let filename = '.gitignore'
+    let entities = ''
+
+    for linelist in readfile(filename)
+        let line = substitute(linelist, '\s|\n|\r', '', "g")
+        if line =~ '^#' | con | endif
+        if line == ''   | con | endif
+        if line =~ '^!' | con | endif
+        if line =~ '/$' | let entities .= ',' . line . '*' | con | endif
+        let entities .= ',' . line
+    endfor
+
+    let argument = substitute(entities, '^,', '', 'g')
+
+    " silent execute 'set wildignore=' . argument
+
+    echo entities
+    echo argument
+    return argument
 endfunction
 
 " Goes through each file resursively (without files specified in .gitignore).
@@ -43,13 +66,13 @@ function! autoindent#AllWhitespaces()
     " TODO
 endfunction
 
-" Fixes all at once
+" Fixes all stylistic errors in current file
 function! autoindent#FormatFile()
-    autoindent#FixIndentation()
     autoindent#FixWhitespaces()
+    autoindent#FixIndentation()
 endfunction
 
-" Fixes stylistic errors in all files at once (without files specified in .gitignore).
+" Fixes stylistic errors in all files, if it's not specified in .gitignore
 function! autoindent#FormatFiles()
     autoindent#AllWhitespaces()
     autoindent#AllIndentation()

@@ -16,7 +16,7 @@ endif
 
 let g:autoloaded_autoindent = 1
 
-function! autoindent#autoload()
-    autocmd BufWritePre * call autoindent#FixIndentation()
+function! autoindent#Autoload()
     autocmd BufWritePre * call autoindent#FixWhitespaces()
+    autocmd BufWritePre * call autoindent#FixIndentation()
 endfunction

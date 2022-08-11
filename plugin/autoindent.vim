@@ -16,68 +16,6 @@ endif
 
 let g:loaded_autoindent = 1
 
-" Fixes indentation of the current buffer and returns cursor position at initial point.
-function! autoindent#FixIndentation()
-    let view = winsaveview()
-    silent execute ':normal gg=G'
-    call winrestview(view)
-endfunction
-
-" Fixes trailing spaces in the current buffer.
-function! autoindent#FixWhitespaces()
-    silent execute ':%s/\s\+$//e'
-endfunction
-
-" Reads .gitignore file
-function! autoindent#GitIgnore()
-    let filename = '.gitignore'
-    let entities = ''
-
-    for linelist in readfile(filename)
-        let line = substitute(linelist, '\s|\n|\r', '', "g")
-        if line =~ '^#' | con | endif
-        if line == ''   | con | endif
-        if line =~ '^!' | con | endif
-        if line =~ '/$' | let entities .= ',' . line . '*' | con | endif
-        let entities .= ',' . line
-    endfor
-
-    let argument = substitute(entities, '^,', '', 'g')
-
-    " silent execute 'set wildignore=' . argument
-
-    echo entities
-    echo argument
-    return argument
-endfunction
-
-" Goes through each file resursively (without files specified in .gitignore).
-function! autoindent#Iterator()
-    " TODO
-endfunction
-
-" Fixes indentation in all files (without files specified in .gitignore).
-function! autoindent#AllIndentation()
-    " TODO
-endfunction
-
-" Fixes trailing spaces in all files (without files specified in .gitignore).
-function! autoindent#AllWhitespaces()
-    " TODO
-endfunction
-
-" Fixes all stylistic errors in current file
-function! autoindent#FormatFile()
-    call autoindent#FixWhitespaces()
-    call autoindent#FixIndentation()
-endfunction
-
-" Fixes stylistic errors in all files, if it's not specified in .gitignore
-function! autoindent#FormatFiles()
-    call autoindent#AllWhitespaces()
-    call autoindent#AllIndentation()
-endfunction
-
 " Exposes the plugin's functions for use as commands in Vim.
 command! -nargs=0 AiFixIndentation call autoindent#FixIndentation()
 command! -nargs=0 AiAllIndentation call autoindent#AllIndentation()

@@ -16,6 +16,41 @@ endif
 
 let g:autoloaded_autoindent = 1
 
-function! autoindent#Autoload()
+augroup AutoindentSession
+    autocmd!
     autocmd BufWritePre * call autoindent#FormatFile()
+augroup END
+
+" Fixes indentation of the current buffer and returns cursor position at initial point.
+function! autoindent#FixIndentation() abort
+    let view = winsaveview()
+    silent execute ':normal gg=G'
+    call winrestview(view)
+endfunction
+
+" Fixes trailing spaces in the current buffer.
+function! autoindent#FixWhitespaces() abort
+    silent execute ':%s/\s\+$//e'
+endfunction
+
+" Fixes indentation in all files (without files specified in .gitignore).
+function! autoindent#AllIndentation() abort
+    " TODO
+endfunction
+
+" Fixes trailing spaces in all files (without files specified in .gitignore).
+function! autoindent#AllWhitespaces() abort
+    " TODO
+endfunction
+
+" Fixes all stylistic errors in current file
+function! autoindent#FormatFile() abort
+    call autoindent#FixWhitespaces()
+    call autoindent#FixIndentation()
+endfunction
+
+" Fixes stylistic errors in all files, if it's not specified in .gitignore
+function! autoindent#FormatFiles() abort
+    call autoindent#AllWhitespaces()
+    call autoindent#AllIndentation()
 endfunction

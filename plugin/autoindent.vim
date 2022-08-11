@@ -16,7 +16,7 @@ endif
 
 let g:loaded_autoindent = 1
 
-function! autoindent#buffer() abort
+function! autoindent#buffer()
     let l:buffer = {}
     let l:buffer.id = getpos('.')[0]
     let l:buffer.offset = getpos('.')[3]
@@ -31,38 +31,40 @@ function! autoindent#buffer() abort
     return buffer
 endfunction
 
-function! autoindent#indent() abort
+function! autoindent#indent()
     let l:prev = call autoindent#buffer()
 
     execute 'normal gg=G'
 
     let l:curr = call autoindent#buffer()
 
-    if l:curr.cursor.x != l:prev.cursor.x || l:curr.cursor.y != l:prev.cursor.y
-        call setpos('.', l:prev.cursor.position)
-    endif
+    " if l:curr.cursor.x != l:prev.cursor.x || l:curr.cursor.y != l:prev.cursor.y
+    "     call setpos('.', l:prev.cursor.position)
+    " endif
+
+    call setpos('.', l:prev.cursor.position)
 
     echo "autoindent#indent() was done"
 endfunction
 
-function! autoindent#spaces() abort
+function! autoindent#spaces()
     " autocmd BufWritePre * :%s/\s\+$//e
     echo "autoindent#spaces() was done"
 endfunction
 
-function! autoindent#format() abort
+function! autoindent#format()
     echo "autoindent#format() was done"
 endfunction
 
-function! autoindent#indent_all() abort
+function! autoindent#indent_all()
     echo "autoindent#indent_all() was done"
 endfunction
 
-function! autoindent#spaces_all() abort
+function! autoindent#spaces_all()
     echo "autoindent#spaces_all() was done"
 endfunction
 
-function! autoindent#format_all() abort
+function! autoindent#format_all()
     echo "autoindent#format_all() was done"
 endfunction
 

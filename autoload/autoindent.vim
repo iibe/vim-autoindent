@@ -7,6 +7,15 @@
 " Last Modified: 10 Aug 2022
 " ------------------------------------------------------------------------------
 
+" Prevents the plugin from being loaded multiple times. If the loaded
+" variable exists, do nothing more. Otherwise, assign the loaded
+" variable and continue running this instance of the plugin.
+if exists('g:autoloaded_autoindent')
+    finish
+endif
+
+let g:autoloaded_autoindent = 1
+
 augroup autoindent
     autocmd!
     autocmd BufWritePre * call autoindent#indent()

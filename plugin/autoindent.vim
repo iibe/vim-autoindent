@@ -68,14 +68,14 @@ endfunction
 
 " Fixes all stylistic errors in current file
 function! autoindent#FormatFile()
-    autoindent#FixWhitespaces()
-    autoindent#FixIndentation()
+    call autoindent#FixWhitespaces()
+    call autoindent#FixIndentation()
 endfunction
 
 " Fixes stylistic errors in all files, if it's not specified in .gitignore
 function! autoindent#FormatFiles()
-    autoindent#AllWhitespaces()
-    autoindent#AllIndentation()
+    call autoindent#AllWhitespaces()
+    call autoindent#AllIndentation()
 endfunction
 
 " Exposes the plugin's functions for use as commands in Vim.

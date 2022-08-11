@@ -16,41 +16,48 @@ endif
 
 let g:loaded_autoindent = 1
 
-function! autoindent#indent()
-    let view = winsaveview()
-    " execute 'normal gg=G'
-    silent normal gg=G
-    call winrestview(view)
-    echo "autoindent#indent() was done"
+" Fixes indentation of current buffer and returns cursor at initial position.
+function! autoindent#fix#indentation()
+    let l:view = winsaveview()
+
+    silent execute ':normal gg=G'
+
+    call winrestview(l:view)
 endfunction
 
-function! autoindent#spaces()
-    " autocmd BufWritePre * :%s/\s\+$//e
-    echo "autoindent#spaces() was done"
+" Fixes trailing spaces
+function! autoindent#fix#whitespaces()
+    silent execute ':%s/\s\+$//e'
 endfunction
 
-function! autoindent#format()
-    echo "autoindent#format() was done"
+" Fixes all at once
+function! autoindent#fix#application()
+    autoindent#fix#whitespaces()
+    autoindent#fix#indentation()
 endfunction
 
-function! autoindent#indent_all()
-    echo "autoindent#indent_all() was done"
+function! autoindent#use#readthrough()
+    " todo: go throught
 endfunction
 
-function! autoindent#spaces_all()
-    echo "autoindent#spaces_all() was done"
+function! autoindent#all#indentation()
+    echo "autoindent#all#indentation() was done"
 endfunction
 
-function! autoindent#format_all()
-    echo "autoindent#format_all() was done"
+function! autoindent#all#whitespaces()
+    echo "autoindent#all#whitespaces() was done"
+endfunction
+
+function! autoindent#all#application()
+    echo "autoindent#all#application() was done"
 endfunction
 
 " Exposes the plugin's functions for use as commands in Vim.
-command! -nargs=0 AiIndent call autoindent#indent()
-command! -nargs=0 AiIndentAll call autoindent#indent_all()
+command! -nargs=0 AiFixIndentation call autoindent#fix#indentation()
+command! -nargs=0 AiAllIndentation call autoindent#all#indentation()
 
-command! -nargs=0 AiSpaces call autoindent#spaces()
-command! -nargs=0 AiSpacesAll call autoindent#spaces_all()
+command! -nargs=0 AiFixWhitespaces call autoindent#fix#whitespaces()
+command! -nargs=0 AiAllWhitespaces call autoindent#all#whitespaces()
 
-command! -nargs=0 AiFormat call autoindent#format()
-command! -nargs=0 AiFormatAll call autoindent#format_all()
+command! -nargs=0 AiFixApplication call autoindent#fix#application()
+command! -nargs=0 AiAllApplication call autoindent#all#application()

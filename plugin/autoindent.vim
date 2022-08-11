@@ -16,34 +16,11 @@ endif
 
 let g:loaded_autoindent = 1
 
-function! autoindent#buffer()
-    let l:buffer = {}
-    let l:buffer.id = getpos('.')[0]
-    let l:buffer.offset = getpos('.')[3]
-    let l:buffer.w = winwidth('%')
-    let l:buffer.h = winheight('%')
-
-    let l:buffer.cursor = {}
-    let l:buffer.cursor.position = getpos('.')
-    let l:buffer.cursor.x = getpos('.')[2]
-    let l:buffer.cursor.y = getpos('.')[1]
-
-    return buffer
-endfunction
-
 function! autoindent#indent()
-    let l:prev = call autoindent#buffer()
-
-    execute 'normal gg=G'
-
-    let l:curr = call autoindent#buffer()
-
-    " if l:curr.cursor.x != l:prev.cursor.x || l:curr.cursor.y != l:prev.cursor.y
-    "     call setpos('.', l:prev.cursor.position)
-    " endif
-
-    call setpos('.', l:prev.cursor.position)
-
+    let view = winsaveview()
+    " execute 'normal gg=G'
+    silent normal gg=G
+    call winrestview(view)
     echo "autoindent#indent() was done"
 endfunction
 

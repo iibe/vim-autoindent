@@ -18,39 +18,39 @@ let g:autoloaded_autoindent = 1
 
 augroup AutoindentSession
     autocmd!
-    autocmd BufWritePre * call autoindent#FormatFile()
+    autocmd BufWritePre * call autoindent#Buffer()
 augroup END
 
 " Fixes indentation of the current buffer and returns cursor position at initial point.
-function! autoindent#FixIndentation() abort
+function! autoindent#BufferIndentation() abort
     let view = winsaveview()
     silent execute ':normal gg=G'
     call winrestview(view)
 endfunction
 
 " Fixes trailing spaces in the current buffer.
-function! autoindent#FixWhitespaces() abort
+function! autoindent#BufferWhitespaces() abort
     silent execute ':%s/\s\+$//e'
 endfunction
 
+" Fixes all stylistic errors in current file
+function! autoindent#Buffer() abort
+    call autoindent#BufferWhitespaces()
+    call autoindent#BufferIndentation()
+endfunction
+
 " Fixes indentation in all files (without files specified in .gitignore).
-function! autoindent#AllIndentation() abort
+function! autoindent#FolderIndentation() abort
     " TODO
 endfunction
 
 " Fixes trailing spaces in all files (without files specified in .gitignore).
-function! autoindent#AllWhitespaces() abort
+function! autoindent#FolderWhitespaces() abort
     " TODO
 endfunction
 
-" Fixes all stylistic errors in current file
-function! autoindent#FormatFile() abort
-    call autoindent#FixWhitespaces()
-    call autoindent#FixIndentation()
-endfunction
-
 " Fixes stylistic errors in all files, if it's not specified in .gitignore
-function! autoindent#FormatFiles() abort
-    call autoindent#AllWhitespaces()
-    call autoindent#AllIndentation()
+function! autoindent#Folder() abort
+    call autoindent#FolderWhitespaces()
+    call autoindent#FolderIndentation()
 endfunction

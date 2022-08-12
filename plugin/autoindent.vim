@@ -17,11 +17,10 @@ endif
 let g:loaded_autoindent = 1
 
 " Exposes the plugin's functions for use as commands in Vim.
-command! -nargs=0 AiFixIndentation call autoindent#FixIndentation()
-command! -nargs=0 AiAllIndentation call autoindent#AllIndentation()
+command! -nargs=0 VaiBuffer call autoindent#Buffer()
+command! -nargs=0 VaiBufferWhitespaces call autoindent#BufferWhitespaces()
+command! -nargs=0 VaiBufferIndentation call autoindent#BufferIndentation()
 
-command! -nargs=0 AiFixWhitespaces call autoindent#FixWhitespaces()
-command! -nargs=0 AiAllWhitespaces call autoindent#AllWhitespaces()
-
-command! -nargs=0 AiFormatFile call autoindent#FormatFile()
-command! -nargs=0 AiFormatFiles call autoindent#FormatFiles()
+command! -nargs=0 VaiFolder call autoindent#Folder()
+command! -nargs=0 VaiBufferWhitespaces call autoindent#FolderWhitespaces()
+command! -nargs=0 VaiFolderIndentation call autoindent#FolderIndentation()

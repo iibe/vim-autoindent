@@ -3,26 +3,28 @@ function! autoindent#utils#Iterator() abort
 endfunction
 
 function! autoindent#utils#GitIgnore() abort
-    return s:GitIgnoreFiles()
+    " silent execute 'set wildignore=' . argument
+    echo s:GitIgnorePaths()
 endfunction
 
+call autoindent#utils#GitIgnore()
+
 " Reads .gitignore file
-function! s:GitIgnoreFiles() abort
+function! s:GitIgnorePaths() abort
     let filename = '.gitignore'
-    let entities = ''
-    for linelist in readfile(filename)
-        let line = substitute(linelist, '\s|\n|\r', '', "g")
-        if line =~ '^#' | con | endif
-        if line == ''   | con | endif
-        if line =~ '^!' | con | endif
-        if line =~ '/$' | let entities .= ',' . line . '*' | con | endif
-        let entities .= ',' . line
+    let entities = []
+    for line in readfile(filename)
+        let glob = substitute(line, '\s|\n|\r', '', 'g')
+        if glob =~ '^#' | continue | endif
+        if glob == ''   | continue | endif
+        if glob =~ '^!' | continue | endif
+        if glob =~ '/$'
+            call add(entities, glob . '*')
+            continue
+        endif
+        call add(entities, glob)
     endfor
-    let argument = substitute(entities, '^,', '', 'g')
-    " silent execute 'set wildignore=' . argument
-    echo entities
-    echo argument
-    return argument
+    return entities
 endfunction
 
 function! s:FileReader() abort

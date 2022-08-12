@@ -76,24 +76,28 @@ git clone https://github.com/iibe/vim-autoindent ~/.vim/pack/dist/start/vim-auto
 
 ## Setup
 
-> Paste one of the options below in your `init.vim`.
-
-Fixes trailing spaces in the current buffer:
+Keymap configuration example:
 
 ```vim
-autocmd BufWritePre * call autoindent#FixWhitespaces()
+nnoremap <silent> <leader>ib  :VaiBuffer<CR>
+nnoremap <silent> <leader>ibi :VaiBufferIndentation<CR>
+nnoremap <silent> <leader>ibw :VaiBufferWhitespaces<CR>
+
+nnoremap <silent> <leader>if  :VaiFolder<CR>
+nnoremap <silent> <leader>ifi :VaiFolderIndentation<CR>
+nnoremap <silent> <leader>ifw :VaiFolderWhitespaces<CR>
 ```
 
-Fixes indentation of the current buffer and returns cursor position at initial point:
+Format-on-save for current file:
 
 ```vim
-autocmd BufWritePre * call autoindent#FixIndentation()
+autocmd BufWritePre * call autoindent#FixBuffer()
 ```
 
-Fixes all stylistic errors in current file:
+Format-on-save for all project (without `.gitignore` files):
 
 ```vim
-autocmd BufWritePre * call autoindent#FormatFile()
+autocmd BufWritePre * call autoindent#FixFolder()
 ```
 
 ## Troubleshooting

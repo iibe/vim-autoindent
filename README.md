@@ -4,7 +4,7 @@ Provides indent functions for buffer. Simple, fast, robust, with no side effects
 
 ## Installation
 
-Install using your favorite package manager, or manually:
+Install using your favorite package manager, or manually.
 
 ### Plugin Manager
 
@@ -74,9 +74,11 @@ git clone https://github.com/iibe/vim-autoindent ~/.vim/pack/dist/start/vim-auto
 
 > Remember to run `:helptags ~/.vim/pack/dist/start/vim-autoindent/doc` to generate help tags.
 
-## Setup
+## Quick Start
 
-Keymap configuration example:
+Map keys or use format-on-save feature.
+
+### Keymap
 
 ```vim
 nnoremap <silent> <leader>ib  :VaiBuffer<CR>
@@ -88,31 +90,32 @@ nnoremap <silent> <leader>ifi :VaiFolderIndentation<CR>
 nnoremap <silent> <leader>ifw :VaiFolderWhitespaces<CR>
 ```
 
-Format-on-save for current file:
+### Format on save
 
-````vim
+> This is a potentially **dangerous** `autocmd` to have as it will always strip trailing whitespace and fix indentation from every file a user saves. Sometimes, trailing whitespace and native indentation is desired, or even **essential** in a file so **be careful** when implementing this `autocmd`. Use this features at your own risk.
 
-autocmd BufWritePre \* call autoindent#FixBuffer()
-    ```
+For current file:
 
-    Format-on-save for all project (without `.gitignore` files):
+```vim
+autocmd BufWritePre * call autoindent#Buffer()
+```
 
-        ```vim
+For whole project (without `.gitignore` files):
 
-autocmd BufWritePre \* call autoindent#FixFolder()
-    ```
+```vim
+autocmd BufWritePre * call autoindent#Folder()
+```
 
 ## Troubleshooting
 
-    - If you get an error during installation, try to visit official repository for your package manager (since it's probably some typo or guide it outdated by itself).
-    - If you have any suggestions for how the plugin works, feel free to do [pull request][pr].
+- If you get an error during installation, try to visit official repository for your package manager (since it's probably some typo or guide it outdated by itself).
+- If you have any suggestions for how the plugin works, feel free to do [pull request][pr].
 
 ## Feedback
 
-    - If you think [vim-autoindent][repo] is useful, consider giving it a star.
-    - If you have a bug or an idea, feel free to open an [issue][issues].
+- If you think [vim-autoindent][repo] is useful, consider giving it a star.
+- If you have a bug or an idea, feel free to open an [issue][issues].
 
-    [repo]: https://github.com/iibe/vim-autoindent
-    [pr]: https://github.com/iibe/vim-autoindent/pulls
-    [issues]: https://github.com/iibe/vim-autoindent/issues
-    ````
+[repo]: https://github.com/iibe/vim-autoindent
+[pr]: https://github.com/iibe/vim-autoindent/pulls
+[issues]: https://github.com/iibe/vim-autoindent/issues

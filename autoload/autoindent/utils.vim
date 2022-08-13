@@ -1,3 +1,4 @@
+" Returns list of files without `.gitignore` restrictions
 function! autoindent#utils#Editable() abort
     let ignore = []
     for pattern in <SID>GitIgnoreGlobbingPatterns()
@@ -71,4 +72,3 @@ function! s:FileWriter(filename) abort
 
     " TODO
 endfunction
-

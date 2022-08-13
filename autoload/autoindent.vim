@@ -24,33 +24,38 @@ function! autoindent#BufferWhitespaces() abort
     silent execute ':%s/\s\+$//e'
 endfunction
 
-" Fixes all stylistic errors in current file
+" Fixes all stylistic errors in the current file
 function! autoindent#Buffer() abort
     call autoindent#BufferWhitespaces()
     call autoindent#BufferIndentation()
 endfunction
 
-" Fixes indentation in all files (without files specified in .gitignore).
+" Fixes indentation in all files (without files specified in `.gitignore`).
 function! autoindent#FolderIndentation() abort
-    let editable = autoindent#utils#Editable()
-    for path in editable
+    for path in autoindent#utils#Editable()
         silent execute ':edit ' . path
         call autoindent#BufferIndentation()
         silent execute ':write'
         silent execute ':bdelete'
     endfor
-    echo editable
 endfunction
 
-call autoindent#FolderIndentation()
-
-" Fixes trailing spaces in all files (without files specified in .gitignore).
+" Fixes trailing spaces in all files (without files specified in `.gitignore`).
 function! autoindent#FolderWhitespaces() abort
-    " TODO
+    for path in autoindent#utils#Editable()
+        silent execute ':edit ' . path
+        call autoindent#BufferWhitespaces()
+        silent execute ':write'
+        silent execute ':bdelete'
+    endfor
 endfunction
 
-" Fixes stylistic errors in all files, if it's not specified in .gitignore
+" Fixes stylistic errors in all files, if it's not specified in `.gitignore`
 function! autoindent#Folder() abort
-    call autoindent#FolderWhitespaces()
-    call autoindent#FolderIndentation()
+    for path in autoindent#utils#Editable()
+        silent execute ':edit ' . path
+        call autoindent#Buffer()
+        silent execute ':write'
+        silent execute ':bdelete'
+    endfor
 endfunction

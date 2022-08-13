@@ -22,5 +22,5 @@ command! -nargs=0 VaiBufferWhitespaces call autoindent#BufferWhitespaces()
 command! -nargs=0 VaiBufferIndentation call autoindent#BufferIndentation()
 
 command! -nargs=0 VaiFolder call autoindent#Folder()
-command! -nargs=0 VaiBufferWhitespaces call autoindent#FolderWhitespaces()
+command! -nargs=0 VaiFolderWhitespaces call autoindent#FolderWhitespaces()
 command! -nargs=0 VaiFolderIndentation call autoindent#FolderIndentation()

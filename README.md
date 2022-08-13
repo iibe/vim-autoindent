@@ -90,26 +90,29 @@ nnoremap <silent> <leader>ifw :VaiFolderWhitespaces<CR>
 
 Format-on-save for current file:
 
-```vim
-autocmd BufWritePre * call autoindent#FixBuffer()
-```
+````vim
 
-Format-on-save for all project (without `.gitignore` files):
+autocmd BufWritePre \* call autoindent#FixBuffer()
+    ```
 
-```vim
-autocmd BufWritePre * call autoindent#FixFolder()
-```
+    Format-on-save for all project (without `.gitignore` files):
+
+        ```vim
+
+autocmd BufWritePre \* call autoindent#FixFolder()
+    ```
 
 ## Troubleshooting
 
-- If you get an error during installation, try to visit official repository for your package manager (since it's probably some typo or guide it outdated by itself).
-- If you have any suggestions for how the plugin works, feel free to do [pull request][pr].
+    - If you get an error during installation, try to visit official repository for your package manager (since it's probably some typo or guide it outdated by itself).
+    - If you have any suggestions for how the plugin works, feel free to do [pull request][pr].
 
 ## Feedback
 
-- If you think [vim-autoindent][repo] is useful, consider giving it a star.
-- If you have a bug or an idea, feel free to open an [issue][issues].
+    - If you think [vim-autoindent][repo] is useful, consider giving it a star.
+    - If you have a bug or an idea, feel free to open an [issue][issues].
 
-[repo]: https://github.com/iibe/vim-autoindent
-[pr]: https://github.com/iibe/vim-autoindent/pulls
-[issues]: https://github.com/iibe/vim-autoindent/issues
+    [repo]: https://github.com/iibe/vim-autoindent
+    [pr]: https://github.com/iibe/vim-autoindent/pulls
+    [issues]: https://github.com/iibe/vim-autoindent/issues
+    ````

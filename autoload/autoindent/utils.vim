@@ -1,37 +1,74 @@
-function! autoindent#utils#Iterator() abort
-    " TODO
-endfunction
+function! autoindent#utils#Editable() abort
+    let ignore = []
+    for pattern in <SID>GitIgnoreGlobbingPatterns()
+        let matches = globpath('.', pattern, 0, 1)
+        for path in matches
+            call add(ignore, path)
+        endfor
+    endfor
 
-function! autoindent#utils#GitIgnore() abort
-    " silent execute 'set wildignore=' . argument
-    echo s:GitIgnorePaths()
-endfunction
-
-call autoindent#utils#GitIgnore()
-
-" Reads .gitignore file
-function! s:GitIgnorePaths() abort
-    let filename = '.gitignore'
-    let entities = []
-    for line in readfile(filename)
-        let glob = substitute(line, '\s|\n|\r', '', 'g')
-        if glob =~ '^#' | continue | endif
-        if glob == ''   | continue | endif
-        if glob =~ '^!' | continue | endif
-        if glob =~ '/$'
-            call add(entities, glob . '*')
+    let codebase = <SID>GetDotFiles() + <SID>GetSrcFiles()
+    let editable = []
+    for path in codebase
+        if isdirectory(path)
             continue
         endif
-        call add(entities, glob)
+        if index(ignore, path) < 0
+            call add(editable, path)
+        endif
     endfor
-    return entities
+
+    return editable
 endfunction
 
-function! s:FileReader() abort
-    " TODO
+" Parses CWD (current working directory) and returns paths of hidden files.
+function! s:GetDotFiles() abort
+    let shallow  = globpath('.', '.[^.]*', 0, 1)
+    let deep = globpath('.', '.[^.]*/**/*', 0, 1)
+    let hidden = shallow + deep
+
+    return hidden
 endfunction
 
-function! s:FileWriter() abort
+" Parses CWD (current working directory) and returns paths of public files.
+function! s:GetSrcFiles() abort
+    let public = globpath('.', '**/*', 0, 1)
+
+    return public
+endfunction
+
+" Parses .gitignore file and returns list of `globbing patterns`
+function! s:GitIgnoreGlobbingPatterns() abort
+    let patterns = []
+    for line in <SID>FileReader('.gitignore')
+        let glob = substitute(line, '\s|\n|\r', '', 'g')
+        if glob == ''   | continue | endif " empty line
+        if glob =~ '^#' | continue | endif " comments
+        if glob =~ '^!' | continue | endif " negation
+        if glob =~ '/$'
+            " ignore all files in directory
+            call add(patterns, glob . '**/*')
+            continue
+        endif
+        call add(patterns, glob)
+    endfor
+
+    return patterns
+endfunction
+
+function! s:FileReader(filename) abort
+    if empty(a:filename) || filereadable(expand(a:filename)) == 0
+        return []
+    endif
+
+    return readfile(a:filename)
+endfunction
+
+function! s:FileWriter(filename) abort
+    if empty(a:filename) || filewritable(expand(a:filename)) == 0
+        return []
+    endif
+
     " TODO
 endfunction
 

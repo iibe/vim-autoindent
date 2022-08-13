@@ -7,19 +7,10 @@
 " Last Modified: 10 Aug 2022
 " ------------------------------------------------------------------------------
 
-" Prevents the plugin from being loaded multiple times. If the loaded
-" variable exists, do nothing more. Otherwise, assign the loaded
-" variable and continue running this instance of the plugin.
-if exists('g:autoloaded_autoindent')
-    finish
-endif
-
-let g:autoloaded_autoindent = 1
-
-augroup AutoindentSession
-    autocmd!
-    autocmd BufWritePre * call autoindent#Buffer()
-augroup END
+" augroup AutoindentSession
+"     autocmd!
+"     autocmd BufWritePre * call autoindent#Buffer()
+" augroup END
 
 " Fixes indentation of the current buffer and returns cursor position at initial point.
 function! autoindent#BufferIndentation() abort
@@ -41,8 +32,17 @@ endfunction
 
 " Fixes indentation in all files (without files specified in .gitignore).
 function! autoindent#FolderIndentation() abort
-    " TODO
+    let editable = autoindent#utils#Editable()
+    for path in editable
+        silent execute ':edit ' . path
+        call autoindent#BufferIndentation()
+        silent execute ':write'
+        silent execute ':bdelete'
+    endfor
+    echo editable
 endfunction
+
+call autoindent#FolderIndentation()
 
 " Fixes trailing spaces in all files (without files specified in .gitignore).
 function! autoindent#FolderWhitespaces() abort

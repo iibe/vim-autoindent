@@ -19,13 +19,13 @@ git clone https://github.com/iibe/vim-autoindent ~/.vim/bundle/vim-autoindent
 For [neobundle.vim](https://github.com/shougo/neobundle.vim):
 
 ```vim
-NeoBundle 'vim-autoindent/vim-autoindent'
+NeoBundle 'iibe/vim-autoindent'
 ```
 
 For [Vundle.vim](https://github.com/vundlevim/vundle.vim):
 
 ```vim
-Plugin 'vim-autoindent/vim-autoindent'
+Plugin 'iibe/vim-autoindent'
 ```
 
 For [vim-plug](https://github.com/junegunn/vim-plug):
@@ -43,13 +43,13 @@ call vam#ActivateAddons([ 'vim-autoindent' ])
 For [dein.vim](https://github.com/shougo/dein.vim):
 
 ```vim
-call dein#add('vim-autoindent/vim-autoindent')
+call dein#add('iibe/vim-autoindent')
 ```
 
 For [minpac](https://github.com/k-takata/minpac):
 
 ```vim
-call minpac#add('vim-autoindent/vim-autoindent')
+call minpac#add('iibe/vim-autoindent')
 ```
 
 ### Manual

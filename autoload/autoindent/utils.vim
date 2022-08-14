@@ -65,10 +65,10 @@ function! s:FileReader(filename) abort
     return readfile(a:filename)
 endfunction
 
-function! s:FileWriter(filename) abort
+function! s:FileWriter(filename, content) abort
     if empty(a:filename) || filewritable(expand(a:filename)) == 0
-        return []
+        call writefile(a:content, a:filename)
     endif
 
-    " TODO
+    call writefile(<SID>FileReader(a:filename), a:filename, "a")
 endfunction
